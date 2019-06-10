@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">vehicle_status</string>
+    <string name="go_vehicle_status">Vehicle Speed</string>
 </resources>
