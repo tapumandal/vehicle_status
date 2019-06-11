@@ -19,7 +19,7 @@
             android:id="@+id/vehicle_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="78 KM"
+            android:text="0.0 KM"
             android:textSize="30dp"/>
         <View
             android:layout_width="150dp"
