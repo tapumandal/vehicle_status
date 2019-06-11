@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "userauthetication.tapumandal.vehicle_status"
+        applicationId "vehicle_status.tapumandal.vehicle_status"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
