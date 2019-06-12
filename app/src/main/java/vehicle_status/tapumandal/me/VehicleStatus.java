@@ -19,8 +19,11 @@ import java.text.DecimalFormat;
 public class VehicleStatus extends AppCompatActivity implements LocationListener {
 
     private int speed;
-    private LocationManager locationManager;
+    private Location currentLocation;
+    private Location startLocation;
+    private float tradeledDistance = 0;
 
+    private LocationManager locationManager;
     private TextView tv_speed;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -35,20 +38,12 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
+        }else{
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1, this);
-
-//        this.onLocationChanged(null);
     }
 
 //    speed is meter per second
@@ -59,19 +54,35 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
         tv_speed.setText(Float.toString(speed)+" KM");
     }
 
+    private void vehiclePosition(Location location) {
+        if(startLocation == null){
+//            vechicle starting position
+            startLocation.setLatitude(location.getLatitude());
+            startLocation.setLongitude(location.getLongitude());
+        }else{
+//            vehicle current position
+            currentLocation.setLatitude(location.getLatitude());
+            currentLocation.setLongitude(location.getLongitude());
+        }
+    }
+    private void travelledDistance() {
+        tradeledDistance = startLocation.distanceTo(currentLocation);
+        Toast.makeText(getApplicationContext(), Float.toString(tradeledDistance), Toast.LENGTH_LONG).show();
+    }
+
 
     @Override
     public void onLocationChanged(Location location) {
 
-
-//        if(location == null){
-//            this.updateVehicleSpeed((float) 0.0);
-//        }else{
-//            this.updateVehicleSpeed(location.getSpeed());
-//        }
-
         this.updateVehicleSpeed(location.getSpeed());
+        if(location != null) {
+            this.vehiclePosition(location);
+            this.travelledDistance();
+        }
     }
+
+
+
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
