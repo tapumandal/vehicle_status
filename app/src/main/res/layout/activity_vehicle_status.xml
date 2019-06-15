@@ -14,7 +14,6 @@
         android:background="#009688"
         android:orientation="vertical">
 
-
         <TextView
             android:id="@+id/vehicle_speed"
             android:layout_width="wrap_content"
@@ -30,6 +29,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SPEED"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/traveled_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0 KM"
+            android:textSize="30dp"
+            android:layout_marginTop="50dp"/>
+        <View
+            android:layout_width="150dp"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Traveled Distance"
             android:textSize="20dp"/>
 
     </LinearLayout>

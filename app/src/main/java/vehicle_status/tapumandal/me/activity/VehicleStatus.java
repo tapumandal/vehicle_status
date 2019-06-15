@@ -11,6 +11,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +26,11 @@ import vehicle_status.tapumandal.me.model.VehicleStatusModel;
 public class VehicleStatus extends AppCompatActivity implements LocationListener {
 
     private int speed;
-    private Location currentLocation;
-    private Location startLocation;
+    private Location currentLocation, startLocation;
     private float tradeledDistance = 0;
 
     private LocationManager locationManager;
-    private TextView tv_speed;
+    private TextView tv_speed, tv_traveled_distance;
 
     public VehicleStatusModel vehicleStatusModel;
     FirebaseDatabase database;
@@ -46,10 +46,14 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
         setContentView(R.layout.activity_vehicle_status);
 
         tv_speed = (TextView) findViewById(R.id.vehicle_speed);
+        tv_traveled_distance = (TextView) findViewById(R.id.traveled_distance);
 
         vehicleStatusModel = new VehicleStatusModel();
         database = FirebaseDatabase.getInstance();
         vehicleStatusRef = database.getReference("vehicle_status");
+        currentLocation = new Location("");
+        startLocation = new Location("");
+
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -57,8 +61,10 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }else{
-            Toast.makeText(getApplicationContext(), "else", Toast.LENGTH_SHORT).show();
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+//            Toast.makeText(getApplicationContext(), "else", Toast.LENGTH_SHORT).show();
+//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, this);
         }
 
     }
@@ -74,45 +80,50 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
     }
 
     private void vehiclePosition(Location location) {
-        if(startLocation == null){
-//            vechicle starting position
-            startLocation.setLatitude(location.getLatitude());
-            startLocation.setLongitude(location.getLongitude());
+        if(vehicleStatusModel.getStartLatitude() > 0 || vehicleStatusModel.getStartLongitude() > 0){                    //  vehicle current position
 
-            vehicleStatusModel.setStartLatitude(location.getLatitude());
-            vehicleStatusModel.setStartLongitude(location.getLongitude());
-        }else{
-//            vehicle current position
             currentLocation.setLatitude(location.getLatitude());
             currentLocation.setLongitude(location.getLongitude());
 
-            vehicleStatusModel.setStartLongitude(location.getLongitude());
+            vehicleStatusModel.setCurrentLatitude(location.getLongitude());
+            vehicleStatusModel.setCurrentLongitude(location.getLatitude());
+        }else{                                                                                      //  vechicle starting position
+
+            startLocation.setLatitude(location.getLatitude());
+            startLocation.setLongitude(location.getLongitude());
+            currentLocation.setLatitude(location.getLatitude());
+            currentLocation.setLongitude(location.getLongitude());
+
             vehicleStatusModel.setStartLatitude(location.getLatitude());
+            vehicleStatusModel.setStartLongitude(location.getLongitude());
+            vehicleStatusModel.setCurrentLatitude(location.getLatitude());
+            vehicleStatusModel.setCurrentLongitude(location.getLongitude());
+
         }
     }
     private void travelledDistance() {
-        tradeledDistance = startLocation.distanceTo(currentLocation);
-        Toast.makeText(getApplicationContext(), Float.toString(tradeledDistance), Toast.LENGTH_LONG).show();
+        tradeledDistance = Float.parseFloat(new DecimalFormat("##.####").format((startLocation.distanceTo(currentLocation))/1000));
+        tv_traveled_distance.setText(Float.toString(tradeledDistance)+" KM");
     }
 
-
-    @Override
-    public void onLocationChanged(Location location) {
-
-        Toast.makeText(getApplicationContext(), "onLocationChanged", Toast.LENGTH_SHORT).show();
-        this.updateVehicleSpeed(location.getSpeed());
-        if(location != null) {
-            this.vehiclePosition(location);
-            this.travelledDistance();
-        }
-
-        this.saveVehicleStatus();
-    }
 
     private void saveVehicleStatus() {
         Toast.makeText(getApplicationContext(), "saveVehicleStatus", Toast.LENGTH_LONG).show();
         vehicleStatusRef.child(uid).setValue(vehicleStatusModel);
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        Log.v("TAG", "IN ON LOCATION CHANGE, lat=" + location.getAltitude()+ ", lon=" + location.getLatitude()+", SPEED="+location.getSpeed());
+        this.updateVehicleSpeed(location.getSpeed());
+
+        this.vehiclePosition(location);
+        this.travelledDistance();
+//
+        this.saveVehicleStatus();
+    }
+
 
 
     @Override
