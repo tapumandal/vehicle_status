@@ -80,20 +80,24 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
     }
 
     private void vehiclePosition(Location location) {
-        if(startLocation.getLatitude() > 0 || startLocation.getLongitude() > 0){                    //  vehicle current position
+        if(vehicleStatusModel.getStartLatitude() > 0 || vehicleStatusModel.getStartLongitude() > 0){                    //  vehicle current position
 
             currentLocation.setLatitude(location.getLatitude());
             currentLocation.setLongitude(location.getLongitude());
 
-            vehicleStatusModel.setStartLongitude(location.getLongitude());
-            vehicleStatusModel.setStartLatitude(location.getLatitude());
+            vehicleStatusModel.setCurrentLatitude(location.getLongitude());
+            vehicleStatusModel.setCurrentLongitude(location.getLatitude());
         }else{                                                                                      //  vechicle starting position
 
             startLocation.setLatitude(location.getLatitude());
             startLocation.setLongitude(location.getLongitude());
+            currentLocation.setLatitude(location.getLatitude());
+            currentLocation.setLongitude(location.getLongitude());
 
             vehicleStatusModel.setStartLatitude(location.getLatitude());
             vehicleStatusModel.setStartLongitude(location.getLongitude());
+            vehicleStatusModel.setCurrentLatitude(location.getLatitude());
+            vehicleStatusModel.setCurrentLongitude(location.getLongitude());
 
         }
     }
