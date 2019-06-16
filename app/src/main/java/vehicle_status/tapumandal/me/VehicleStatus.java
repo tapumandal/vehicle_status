@@ -46,8 +46,8 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
 
     }
 
-//    speed is meter per second
-    private void updateVehicleSpeed(float speed) {
+
+    private void updateVehicleSpeed(float speed) { //   speed is meter per second
 
         speed = (speed*3600)/1000;
         speed = Float.parseFloat(new DecimalFormat("##.##").format(speed));
@@ -55,13 +55,11 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
     }
 
     private void vehiclePosition(Location location) {
-        if(startLocation == null){
-//            vechicle starting position
+        if(startLocation == null){ //   vechicle starting position
             startLocation.setLatitude(location.getLatitude());
             startLocation.setLongitude(location.getLongitude());
         }else{
-//            vehicle current position
-            currentLocation.setLatitude(location.getLatitude());
+            currentLocation.setLatitude(location.getLatitude()); //  vehicle current position
             currentLocation.setLongitude(location.getLongitude());
         }
     }
