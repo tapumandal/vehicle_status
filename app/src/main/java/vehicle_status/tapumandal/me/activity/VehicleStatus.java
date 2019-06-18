@@ -115,12 +115,10 @@ public class VehicleStatus extends AppCompatActivity implements LocationListener
     @Override
     public void onLocationChanged(Location location) {
 
-        Log.v("TAG", "IN ON LOCATION CHANGE, lat=" + location.getAltitude()+ ", lon=" + location.getLatitude()+", SPEED="+location.getSpeed());
         this.updateVehicleSpeed(location.getSpeed());
 
         this.vehiclePosition(location);
         this.travelledDistance();
-//
         this.saveVehicleStatus();
     }
 
