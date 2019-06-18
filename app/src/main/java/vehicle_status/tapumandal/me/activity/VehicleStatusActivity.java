@@ -22,7 +22,7 @@ import java.text.DecimalFormat;
 import vehicle_status.tapumandal.me.R;
 import vehicle_status.tapumandal.me.model.VehicleStatusModel;
 
-public class VehicleStatus extends AppCompatActivity implements LocationListener {
+public class VehicleStatusActivity extends AppCompatActivity implements LocationListener {
 
     private int speed;
     private Location currentLocation;

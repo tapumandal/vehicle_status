@@ -26,6 +26,6 @@ public class MainActivity extends AppCompatActivity {
     public void vehicleStatus(View view) {
 
 
-        startActivity(new Intent(getApplicationContext(), VehicleStatus.class));
+        startActivity(new Intent(getApplicationContext(), VehicleStatusActivity.class));
     }
 }
