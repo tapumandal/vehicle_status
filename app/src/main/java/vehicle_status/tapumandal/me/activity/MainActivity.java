@@ -10,7 +10,7 @@ import vehicle_status.tapumandal.me.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button vehicleStatusBtn;
+    private Button vehicleStatusBtn, mapView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +21,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         vehicleStatusBtn = (Button) findViewById(R.id.go_vehicle_status);
+        mapView = (Button) findViewById(R.id.go_map_view);
     }
 
     public void vehicleStatus(View view) {
 
 
         startActivity(new Intent(getApplicationContext(), VehicleStatusActivity.class));
+    }
+
+    public void mapView(View view) {
+        startActivity(new Intent(getApplicationContext(), MapActivity.class));
     }
 }
