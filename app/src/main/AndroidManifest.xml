@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="vehicle_status.tapumandal.me.activity.VehicleStatusActivity"></activity>
+        <activity android:name="vehicle_status.tapumandal.me.activity.VehicleStatus"></activity>
         <activity android:name="vehicle_status.tapumandal.me.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
