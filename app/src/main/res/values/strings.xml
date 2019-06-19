@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">vehicle_status</string>
     <string name="go_vehicle_status">Vehicle Speed</string>
+    <string name="go_map_view">Explore MAP</string>
 </resources>
