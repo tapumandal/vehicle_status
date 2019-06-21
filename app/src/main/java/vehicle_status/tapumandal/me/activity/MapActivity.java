@@ -1,10 +1,12 @@
 package vehicle_status.tapumandal.me.activity;
 
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.mapbox.android.core.location.LocationEngineCallback;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -24,8 +26,8 @@ import vehicle_status.tapumandal.me.R;
 /**
  * Use the LocationComponent to easily add a device location "puck" to a Mapbox map.
  */
-public class MapActivity extends AppCompatActivity implements
-        OnMapReadyCallback, PermissionsListener {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
+//public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,  {
 
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
@@ -37,7 +39,7 @@ public class MapActivity extends AppCompatActivity implements
 
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(this, "pk.eyJ1IjoidGFwdW1hbmRhbCIsImEiOiJjangydWh4OG4wNW12NDhyemhjMXh1Mjk5In0.d6URGWIZLRH3eHWfl2CiDQ");
+        Mapbox.getInstance(this, getString(R.string.map_box_access_token));
 
         // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_map);
@@ -59,6 +61,46 @@ public class MapActivity extends AppCompatActivity implements
                     }
                 });
     }
+
+    @Override
+    @SuppressWarnings( {"MissingPermission"})
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+
+
 
     @SuppressWarnings( {"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
@@ -111,46 +153,5 @@ public class MapActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    @SuppressWarnings( {"MissingPermission"})
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
 }
