@@ -1,12 +1,10 @@
 package vehicle_status.tapumandal.me.activity;
 
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.mapbox.android.core.location.LocationEngineCallback;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -26,8 +24,8 @@ import vehicle_status.tapumandal.me.R;
 /**
  * Use the LocationComponent to easily add a device location "puck" to a Mapbox map.
  */
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
-//public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,  {
+public class MapMyLocationActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener {
+//public class MapMyLocationActivity extends AppCompatActivity implements OnMapReadyCallback,  {
 
     private PermissionsManager permissionsManager;
     private MapboxMap mapboxMap;
@@ -51,7 +49,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-        MapActivity.this.mapboxMap = mapboxMap;
+        MapMyLocationActivity.this.mapboxMap = mapboxMap;
 
         mapboxMap.setStyle(Style.MAPBOX_STREETS,
                 new Style.OnStyleLoaded() {

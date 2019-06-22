@@ -47,6 +47,44 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/go_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#037468"
+            android:onClick="mapDirection"
+            android:paddingLeft="33dp"
+            android:paddingRight="33dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="@string/map_direction"
+            android:textColor="#0AC2B1"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/go_search_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#037468"
+            android:onClick="searchLocation"
+            android:paddingLeft="33dp"
+            android:paddingRight="33dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="@string/map_search_location"
+            android:textColor="#0AC2B1"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

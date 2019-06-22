@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">vehicle_status</string>
     <string name="go_vehicle_status">Vehicle Speed</string>
-    <string name="go_map_view">Explore MAP</string>
+    <string name="go_map_view">My Location</string>
 
     <string name="map_box_access_token">pk.eyJ1IjoidGFwdW1hbmRhbCIsImEiOiJjangydWh4OG4wNW12NDhyemhjMXh1Mjk5In0.d6URGWIZLRH3eHWfl2CiDQ</string>
+    <string name="map_direction">Direction</string>
+    <string name="map_search_location">Search Location</string>
 </resources>

@@ -31,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mapView(View view) {
-        startActivity(new Intent(getApplicationContext(), MapActivity.class));
+        startActivity(new Intent(getApplicationContext(), MapMyLocationActivity.class));
+    }
+
+    public void searchLocation(View view) {
+    }
+
+    public void mapDirection(View view) {
     }
 }
