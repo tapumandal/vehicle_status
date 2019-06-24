@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void searchLocation(View view) {
+        startActivity(new Intent(getApplicationContext(), SearchLocationActivity.class));
     }
 
     public void mapDirection(View view) {
