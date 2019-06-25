@@ -10,6 +10,16 @@
         android:id="@+id/map_search_location"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <!--<EditText-->
+            <!--android:id="@+id/fab_location_search"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:hint="Search"/>-->
+        <Button
+            android:id="@+id/fab_location_search"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Search"/>
     </com.mapbox.mapboxsdk.maps.MapView>
+
 </android.support.constraint.ConstraintLayout>
